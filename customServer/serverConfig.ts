@@ -1,4 +1,4 @@
-import { BootServer, BootServerConfig, DefaultHatSite } from "hat-server";
+import { BootServer, BootServerConfig, DefaultHatSite } from "@ringpublishing/hat-server";
 import http from "http";
 import type { ApolloQueryResult } from "@apollo/client";
 
