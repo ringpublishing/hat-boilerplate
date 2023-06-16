@@ -1,0 +1,32 @@
+.examples {
+  padding: 0 20%;
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 2px solid #ddd;
+    padding: 20px 0;
+
+    &.noborder {
+      border-bottom: none;
+    }
+
+    .left {
+      padding-right: 10px;
+    }
+  }
+}
+
+.examples {
+  .ExternalAPIComponent {
+    h2 {
+      font-size: 25px;
+    }
+  }
+}
+
+
+.WebsitesAPIComponent {
+  margin: 0;
+  padding: 0;
+}
