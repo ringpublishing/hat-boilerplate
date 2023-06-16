@@ -11,7 +11,7 @@ import {
 } from "hat-ring-components";
 import "styles/examples.scss";
 import ExternalAPIComponentStyles from "styles/ExternalApiComponent.module.scss";
-import { HATUrlWithParsedQuery } from "hat-server";
+import { HATUrlWithParsedQuery } from "@ringpublishing/hat-server";
 import Link from "next/link";
 import { PageHelper } from "helpers/PageHelper";
 import * as _ from "lodash";

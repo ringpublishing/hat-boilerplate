@@ -2,7 +2,7 @@ import { AppContext, SiteContentType } from "hat-ring-components";
 import { Grid } from "hat-ring-components";
 import { widgets } from "./widgets";
 import "styles/gridComponentPage.scss";
-import { HATUrlWithParsedQuery } from "hat-server";
+import { HATUrlWithParsedQuery } from "@ringpublishing/hat-server";
 import { PageHelper } from "helpers/PageHelper";
 import * as _ from "lodash";
 

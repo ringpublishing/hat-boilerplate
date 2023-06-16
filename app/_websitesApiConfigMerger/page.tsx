@@ -1,4 +1,4 @@
-import { HATUrlWithParsedQuery } from "hat-server";
+import { HATUrlWithParsedQuery } from "@ringpublishing/hat-server";
 import { configs } from "./configs";
 import * as _ from "lodash";
 

@@ -4,7 +4,7 @@ import {
   StoryMainImage,
   SiteContentType,
 } from "hat-ring-components";
-import { HATUrlWithParsedQuery } from "hat-server";
+import { HATUrlWithParsedQuery } from "@ringpublishing/hat-server";
 import * as RoutingComponents from "./routes";
 import { PageHelper } from "helpers/PageHelper";
 export const revalidate = 0;

@@ -24,7 +24,7 @@
     "cross-env": "^7.0.3",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
-    "hat-example-components": "https://github.com/ringpublishing/hat-example-components.git#1.0.3",
+    "hat-example-components": "https://github.com/ringpublishing/hat-example-components.git#1.0.5",
     "hat-ring-components": "https://github.com/ringpublishing/hat-components.git#1.0.0",
     "@ringpublishing/hat-server": "1.0.0",
     "lodash": "^4.17.21",

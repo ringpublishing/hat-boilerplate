@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "/styles/Home.module.scss";
-import { HATUrlWithParsedQuery } from "hat-server";
+import { HATUrlWithParsedQuery } from "@ringpublishing/hat-server";
 import { RingImage } from "hat-ring-components";
 export const revalidate = 0;
 export default async function Page({
