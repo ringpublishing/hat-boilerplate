@@ -37,7 +37,7 @@ export default async function WebsitesApiConfigMerger({
       "GULP-AMP-MODULES-LIST",
     ];
     if (typeof obj === "object") {
-      for (const [key, v] of Object.entries(obj)) {
+      for (var keys in obj) {
         if (typeof obj[keys] === "object") {
           populateWidgets(obj[keys]);
         } else {

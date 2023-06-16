@@ -1,5 +1,5 @@
 import { AppContext, SiteContentType } from "hat-ring-components";
-import { HATUrlWithParsedQuery } from "hat-server";
+import { HATUrlWithParsedQuery } from "@ringpublishing/hat-server";
 import * as _ from "lodash";
 
 export class PageHelper {
