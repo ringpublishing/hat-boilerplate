@@ -1,0 +1,38 @@
+---
+import * as RoutingComponents from "./routes";
+import { widgets, slots } from "../widgets";
+import { cssModules } from "../cssModules";
+import { PageHelper } from "../helpers/PageHelper";
+import Layout from "../layouts/Layout.astro";
+
+const cacheControlMaxAge = process.env.RESPONSE_HEADER_CACHE_CONTROL_MAX_AGE || 60;
+Astro.response.headers.set('Cache-Control', `public, max-age=${cacheControlMaxAge}`);
+
+const context = PageHelper.mapSearchParamsToAppContext(Astro.locals['hatControllerParams'], {
+    widgets, slots,
+}, cssModules);
+
+let toRender: boolean | string = false;
+
+if (!context.siteNodeId || !context.siteContentType) {
+    Astro.response.status = 404;
+    toRender = 'not found';
+}
+
+let RoutingComponent = RoutingComponents["NotHandled"] as any;
+
+if (context.siteContentType && RoutingComponents[context.siteContentType]) {
+    RoutingComponent = RoutingComponents[context.siteContentType];
+}
+
+---
+{toRender ? toRender :
+    <Layout context={context}>
+        <div
+                class={`gridComponentPage node-${context.id}`}
+                data-content-type={context.siteContentType}
+        >
+            <RoutingComponent context={context}/>
+        </div>
+    </Layout>}
+

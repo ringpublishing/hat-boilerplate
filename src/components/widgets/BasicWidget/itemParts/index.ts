@@ -1,0 +1,1 @@
+export { default as ExampleAdditionalPart } from "./ExampleAdditionalPart.astro";

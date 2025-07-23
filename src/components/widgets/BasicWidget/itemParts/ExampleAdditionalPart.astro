@@ -1,0 +1,21 @@
+---
+import gql from "graphql-tag";
+const { context, widgetConfig, data } = Astro.props;
+
+const dateFromData = data?.modificationTime;
+
+export const getFragment = () => {
+    return {
+        variables: {},
+        query: gql`
+            fragment ExampleModificationDate on SectionItem {
+                 modificationTime
+            }
+        `,
+    };
+};
+---
+
+<div class="ExampleAdditionalPart">
+    example additional part {dateFromData}
+</div>

@@ -1,16 +1,40 @@
 {
-  "extends": "./tsconfig.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    "allowJs": false,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
     "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": false,
     "outDir": "dist",
-    "lib": ["es2019"],
+    "lib": [
+      "es2021",
+      "dom"
+    ],
     "target": "es2019",
     "isolatedModules": false,
-    "noEmit": false
+    "noEmit": false,
+    "skipLibCheck": true
   },
   "include": [
-	  "customServer/server.ts",
-	  "customServer/serverPaas.ts",
-    "cicd/postbuild.ts"
+    "package.json",
+    "node_modules/hat-ring-components/src/types/abstracts.ts",
+    "node_modules/hat-ring-components/**/GridHelper.ts",
+    "node_modules/hat-ring-components/**/*Config.ts",
+    "node_modules/hat-ring-components/src/websitesApiConfigs.ts",
+    "websiteManagerConfigs.ts",
+    "cicd/postbuild.ts",
   ],
+  "exclude": [
+  ]
 }

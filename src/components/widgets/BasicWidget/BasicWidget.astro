@@ -1,0 +1,15 @@
+---
+const {context, widgetConfig, } = Astro.props;
+import {
+    BasicWidget as BasicWidgetCore
+} from "hat-ring-components";
+import * as coreItemParts from "hat-ring-components/src/components/widgets/common/BasicWidget/itemParts";
+import * as projectItemParts from "./itemParts";
+const itemParts = Object.assign({}, coreItemParts, projectItemParts);
+
+const extendableAttributes = {
+    itemParts: itemParts,
+};
+---
+
+<BasicWidgetCore widgetConfig={widgetConfig} context={context} extendableAttributes={extendableAttributes}/>

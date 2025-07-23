@@ -1,0 +1,44 @@
+---
+const {context} = Astro.props;
+import Grid from "hat-ring-components/src/components/Grid/Grid.astro";
+---
+
+<>
+    <header>
+        <Grid
+                context={context}
+                config={{
+                    containers: ["headerWidgets"],
+                    boxes: [
+                        "widgets_above_content",
+                        "widgets_middle_content",
+                        "widgets_below_content",
+                    ],
+                }}
+        />
+    </header>
+
+    <Grid
+            context={context}
+            config={{
+                containers: [
+                    "tag_ExtendedWidgets1",
+                    "tag_ExtendedWidgets2"
+                ],
+            }}
+    />
+    <footer>
+
+        <Grid
+                context={context}
+                config={{
+                    containers: ["footerWidgets"],
+                    boxes: [
+                        "widgets_above_content",
+                        "widgets_middle_content",
+                        "widgets_under_content",
+                    ],
+                }}
+        />
+    </footer>
+</>

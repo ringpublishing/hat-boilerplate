@@ -1,0 +1,65 @@
+---
+import Grid from "hat-ring-components/src/components/Grid/Grid.astro";
+import {widgets} from "../widgets";
+import {PageHelper} from "../helpers/PageHelper";
+
+import {cssModules} from "../cssModules";
+const cacheControlMaxAge = process.env.RESPONSE_HEADER_CACHE_CONTROL_MAX_AGE || 60;
+Astro.response.headers.set('Cache-Control', `public, max-age=${cacheControlMaxAge}`);
+
+const context = PageHelper.mapSearchParamsToAppContext(Astro.locals['hatControllerParams'], {
+    widgets,
+}, cssModules);
+
+
+import Layout from "../layouts/Layout.astro";
+
+---
+
+<Layout context={context}>
+    <div class={`gridComponentPage node-${context.id}`} data-content-type={context.siteContentType}>
+        <header>
+            <Grid
+                    context={context}
+                    config={{
+                        containers: ["headerWidgets"],
+                        boxes: [
+                            "widgets_above_content",
+                            "widgets_middle_content",
+                            "widgets_below_content",
+                        ],
+                    }}
+            />
+        </header>
+
+        <Grid
+                context={context}
+                config={{
+                    containers: ["HomePage1", "HomePage2", "HomePage3", "HomePage4"],
+                    boxes: [
+                        "box_top",
+                        "box_left",
+                        "box_middle",
+                        "box_right",
+                        "box_bottom",
+                    ],
+                }}
+        />
+
+        <footer>
+            <Grid
+                    context={context}
+                    config={{
+                        containers: ["footerWidgets"],
+                        boxes: [
+                            "widgets_above_content",
+                            "widgets_middle_content",
+                            "widgets_under_content",
+                        ],
+                    }}
+            />
+        </footer>
+    </div>
+</Layout>
+
+

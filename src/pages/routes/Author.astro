@@ -1,0 +1,45 @@
+---
+const {context} = Astro.props;
+import Grid from "hat-ring-components/src/components/Grid/Grid.astro";
+---
+
+<>
+    <meta name="DC.Identifier" content={context.id}/>
+    <header>
+        <Grid
+                context={context}
+                config={{
+                    containers: ["headerWidgets"],
+                    boxes: [
+                        "widgets_above_content",
+                        "widgets_middle_content",
+                        "widgets_below_content",
+                    ],
+                }}
+        />
+    </header>
+
+    <Grid
+            context={context}
+            config={{
+                containers: [
+                    "AuthorWidgets1",
+                    "AuthorWidgets2"
+                ],
+            }}
+    />
+    <footer>
+
+        <Grid
+                context={context}
+                config={{
+                    containers: ["footerWidgets"],
+                    boxes: [
+                        "widgets_above_content",
+                        "widgets_middle_content",
+                        "widgets_under_content",
+                    ],
+                }}
+        />
+    </footer>
+</>

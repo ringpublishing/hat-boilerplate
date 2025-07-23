@@ -1,0 +1,118 @@
+---
+export interface Props {
+    context: AppContext;
+}
+type Component = (context: AppContext) => Promise<AppContext>;
+
+import {SEOProps} from "astro-seo";
+import {
+    SafeHead,
+    AppContext,
+    SeoMetaTitle,
+    SeoMetaDescription,
+    SeoMetaOpenGraph,
+    SeoMetaTwitter,
+    SeoMetaRobots,
+    SeoMetaCustomMetaTags,
+    SeoMetaCanonical,
+    SeoListGridPrevNext,
+    UtilsHelper_getQueryParam,
+    SeoMetaDecoratorRobots,
+    SeoMetaAlternates,
+    ConfigHelper_getLanguage,
+} from "hat-ring-components";
+import {SeoHelper_isSeoHomepage} from "hat-ring-components/src/helpers/seo/SeoHelper";
+import _ from "lodash";
+import Grid from "hat-ring-components/src/components/Grid/Grid.astro";
+
+const {context} = Astro.props as Props;
+import "../styles/globals.scss";
+
+import {SEO} from "astro-seo";
+import {SchemaOrg, SiteContentType} from "hat-ring-components";
+import { Version } from "../version";
+
+const isGridLocationMode = UtilsHelper_getQueryParam('gridLocation', context) !== null;
+export async function generateMetadata({context}: {context: AppContext}): Promise<SEOProps> {
+    const defaultSeoComponents: Array<any> = [
+        SeoMetaTitle,
+        SeoMetaDescription,
+        SeoMetaOpenGraph,
+        SeoMetaTwitter,
+        SeoMetaRobots,
+        SeoMetaCustomMetaTags,
+        SeoMetaCanonical,
+        SeoMetaAlternates
+    ];
+    const metadataSeoComponents: Array<any> = [];
+    const isGridLocationMode = UtilsHelper_getQueryParam('gridLocation', context) !== null;
+    const gridLocationWidgetType = UtilsHelper_getQueryParam('gridLocationWidgetType', context);
+
+    if (isGridLocationMode) {
+        switch (gridLocationWidgetType) {
+            case 'genericList':
+                metadataSeoComponents.push(
+                    SeoMetaTitle,
+                    SeoMetaDescription
+                )
+                break;
+            default:
+                metadataSeoComponents.push(...defaultSeoComponents)
+                break;
+        }
+    } else {
+        if (context?.siteContentType === SiteContentType.Error404) {
+            metadataSeoComponents.push(SeoMetaTitle, SeoMetaDescription, SeoMetaRobots, SeoMetaCustomMetaTags);
+        } else if (context?.siteContentType === SiteContentType.Story) {
+            metadataSeoComponents.push(
+                ...defaultSeoComponents)
+
+        } else {
+            if (!await SeoHelper_isSeoHomepage(context)) {
+                metadataSeoComponents.push(SeoListGridPrevNext);
+            }
+            metadataSeoComponents.push(...defaultSeoComponents);
+        }
+    }
+
+    let metadataToReturn: SEOProps = {};
+
+    const metadataResults = await Promise.all(
+        metadataSeoComponents.map(async (component: Component) => await component(context))
+    );
+
+    return _.mergeWith(metadataToReturn, ...metadataResults, (objValue, srcValue) => {
+        if (_.isArray(objValue)) {
+            return objValue.concat(srcValue);
+        }
+    });
+}
+
+let seoMetaData = await generateMetadata({context: context});
+seoMetaData = await SeoMetaDecoratorRobots(context, seoMetaData);
+---
+
+<!doctype html>
+<html lang={await ConfigHelper_getLanguage(context)}>
+<head>
+    <meta charset="UTF-8"/>
+    <Version context={context}/>
+    <SEO {...seoMetaData}/>
+    <meta name="viewport" content="width=device-width"/>
+    <SafeHead>
+        <Grid
+                context={context}
+                config={{
+                    containers: ["devGeneral"],
+                    boxes: ["headWidgets"],
+                }}
+        />
+    </SafeHead>
+    {isGridLocationMode ? '' : <slot name="head"/>}
+</head>
+<body>
+<slot/>
+{isGridLocationMode ? '' : <SchemaOrg context={context}/>}
+</body>
+</html>
+
