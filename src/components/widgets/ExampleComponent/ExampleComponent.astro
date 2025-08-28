@@ -1,0 +1,45 @@
+---
+import {AppContext, AbstractWidgetConfig, WidgetHelper_getWidgetCssClasses, WidgetHelper_renderEmptyWidget, WebsiteApiProvider} from "hat-ring-components";
+import gql from "graphql-tag";
+
+const {context, widgetConfig} = Astro.props as {
+    context: AppContext;
+    widgetConfig: AbstractWidgetConfig;
+};
+
+const query = gql`
+    query ($storyId: UUID) {
+        story(id: $storyId) {
+            topics {
+                topic {
+                    name
+                }
+            }
+        }
+    }
+`;
+let toRender: boolean | string | JSX.Element = false;
+const variables = {
+    storyId: context.id,
+};
+let response = await WebsiteApiProvider.call(query, variables, widgetConfig.cacheTTL);
+if (!response) {
+    toRender = WidgetHelper_renderEmptyWidget(widgetConfig);
+}
+---
+
+
+{
+    toRender ? (
+            <Fragment set:html={toRender} />
+        ) : (
+            <div class={WidgetHelper_getWidgetCssClasses("ExampleComponent", widgetConfig, context)}>
+                <div class="topics">
+                    {response?.data?.story?.topics?.map(({topic}) => (
+                        <span class="topic">{topic.name}</span>
+                    ))}
+                </div>
+            </div>
+        )
+    }
+

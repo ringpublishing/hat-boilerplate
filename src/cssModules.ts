@@ -1,4 +1,5 @@
-import storyContent from './styles/StoryContent/StoryContent.module.scss';
+import exampleComponent from './styles/ExampleComponent/ExampleComponent.module.scss';
+
 export const cssModules = {
-    StoryContent: storyContent.StoryContent,
+    ExampleComponent: exampleComponent.ExampleComponent,
 };
