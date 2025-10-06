@@ -1,18 +1,19 @@
 ---
 import Grid from "hat-ring-components/src/components/Grid/Grid.astro";
 import {widgets} from "../widgets";
-import {PageHelper} from "../helpers/PageHelper";
 
 import {cssModules} from "../cssModules";
+import Layout from "../layouts/Layout.astro";
+import {PageHelper_mapSearchParamsToAppContext} from "../../../hat-ring-components";
+
 const cacheControlMaxAge = process.env.RESPONSE_HEADER_CACHE_CONTROL_MAX_AGE || 60;
 Astro.response.headers.set('Cache-Control', `public, max-age=${cacheControlMaxAge}`);
 
-const context = PageHelper.mapSearchParamsToAppContext(Astro.locals['hatControllerParams'], {
+const context = PageHelper_mapSearchParamsToAppContext(Astro.locals['hatControllerParams'], {
     widgets,
 }, cssModules);
 
 
-import Layout from "../layouts/Layout.astro";
 
 ---
 
