@@ -24,6 +24,11 @@ export default defineConfig({
         assets: assetsPath,
         assetsPrefix: !isDev && isOnBamboo ? 'https://' + imageHost + '/' + assetsPath : ''
     },
+    security: {
+        allowedDomains: [{
+            hostname: '**.example.dev', protocol: 'https'
+        }]
+    },
     vite: {
         define: {
             '__VERSION__': JSON.stringify(process.env.npm_package_version),
